@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link rel="stylesheet" type ="text/css" href = "C:\Users\Компуша\Desktop\Питонья папка\Style.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=<h1>Форма ввода данных студентов</h1>, initial-scale=1.0">
+    <title>Not found</title>
+</head>
+<body>
+    <a href="index.html"><img src="cat.jpg" alt="Home" style="position: absolute; top: 10px; left: 10px; width: 50px; height: 50px;"></a>
+   
+    <h1><center> Неуказанные фильмы</center></h1>
+    <form id="filmForm">
+    <label for="filmname">Название фильма</label>
+    <input type="text" id="filmname" name="filmname">
+    
+    <label for="Director">Режиссёр</label>
+    <input type="text" id="Director" name="Director">
+    
+    <label for="Year">Год</label>
+    <input type="number" id="Year" name="Year">
+    
+    
+    <input type="button" value="Добавить фильм" onclick="addfilm()">
+    </form>
+    <table id="filmsTable">
+    <tr>
+    <th>Название фильма</th>
+    <th>Режиссёр</th>
+    <th>Год выпуска</th>
+    
+    </tr>
+    </table>
+    <script>
+    var films = [];
+    
+    // Функция для добавления студента и обновления таблицы и статистики
+    function addfilm() {
+    var filmname = document.getElementById("filmname").value;
+    var Director = document.getElementById("Director").value;
+    var Year = parseInt(document.getElementById("Year").value);
+    
+    
+    films.push({ filmname: filmname, Director: Director, Year: Year});
+    
+    // Сортировка студентов по фамилии
+    films.sort(function(a, b) {
+    return a.filmname.localeCompare(b.filmname);
+    });
+    
+    // Обновление таблицы
+    updateTable();
+    
+    // Обновление статистики
+    updateStats();
+    }
+    
+    // Функция для обновления таблицы с данными студентов
+    function updateTable() {
+    var table = document.getElementById("filmsTable");
+    
+    // Очистка таблицы
+    while (table.rows.length > 1) {
+    table.deleteRow(-1);
+    }
+    
+    // Добавление данных студентов в таблицу
+    films.forEach(function(film) {
+    var row = table.insertRow(-1);
+    var cell1 = row.insertCell(0);
+    var cell2 = row.insertCell(1);
+    var cell3 = row.insertCell(2);
+    cell1.innerHTML = film.filmname;
+    cell2.innerHTML = film.Director;
+    cell3.innerHTML = film.Year;
+    
+    });
+    }
+    
+    </script>
+</body>
+</html>
